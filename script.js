@@ -382,7 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "/ProjectCoverImage/Aiimagegen3.png",
       ],
       liveUrl: "https://ai-image-generator-mern.vercel.app/",
-      githubUrl: "https://github.com/AnuvanshKaushik/AI-Image-Generator-MERN",
+      githubUrl: "https://github.com/AnuvanshKaushik/IMAGE_GENERATOR",
     },
     {
       id: 2,
@@ -398,11 +398,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "/ProjectCoverImage/Stock3.png",
       ],
       liveUrl: "#",
-      githubUrl: "https://github.com/AnuvanshKaushik/Stock-Prediction-LSTM",
+      githubUrl: "https://github.com/AnuvanshKaushik/Stock_Prediction_App",
     },
     {
       id: 3,
-      title: "Stock Prediction Analysis",
+      title: "Sales Prediction Analysis",
       category: "Data Science",
       description:
         "Stock Prediction Analysis is a web-based application that forecasts stock prices using a machine learning approach. The frontend is built with HTML, CSS, and JavaScript, providing a clean and interactive user interface. The backend is developed using Flask, which handles user input and communicates with a trained Random Forest model. This model, saved using Pickle, analyzes historical stock data to make accurate predictions. The application allows users to input relevant stock parameters and instantly receive predicted stock prices, offering a practical demonstration of data-driven financial forecasting.",
@@ -413,7 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "/ProjectCoverImage/Sale2.png",
       ],
       liveUrl: "#",
-      githubUrl: "https://github.com/AnuvanshKaushik/Stock-Prediction-LSTM",
+      githubUrl: "https://github.com/AnuvanshKaushik/SALES_PREDICTION",
     },
     {
       id: 4,
@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "/ProjectCoverImage/Whether4.png",
       ],
       liveUrl: "#",
-      githubUrl: "https://github.com/AnuvanshKaushik/Stock-Prediction-LSTM",
+      githubUrl: "https://github.com/AnuvanshKaushik/Whether_Forecasting",
     },
   ]
 
