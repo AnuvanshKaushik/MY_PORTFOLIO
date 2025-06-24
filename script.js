@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let wordIndex = 0
   let charIndex = 0
   let isDeleting = false
-  const isEnd = false
 
   function type() {
     const currentWord = words[wordIndex]
@@ -212,6 +211,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
+  // Experience section animation
+  const experienceSection = document.querySelector(".experience")
+  let experienceAnimated = false
+
+  window.addEventListener("scroll", () => {
+    if (!experienceAnimated && isElementInViewport(experienceSection)) {
+      animateExperience()
+      experienceAnimated = true
+    }
+  })
+
+  // Achievements section animation
+  const achievementsSection = document.querySelector(".achievements")
+  let achievementsAnimated = false
+
+  window.addEventListener("scroll", () => {
+    if (!achievementsAnimated && isElementInViewport(achievementsSection)) {
+      animateAchievements()
+      achievementsAnimated = true
+    }
+  })
+
   // Check if element is in viewport
   function isElementInViewport(el) {
     const rect = el.getBoundingClientRect()
@@ -253,6 +274,47 @@ document.addEventListener("DOMContentLoaded", () => {
       // Style the outer circle with gradient based on percentage
       const outerCircle = circle.querySelector(".outer-circle")
       outerCircle.style.background = `conic-gradient(var(--primary-color) ${percent * 3.6}deg, var(--light-color) 0deg)`
+    })
+  }
+
+  // Animate experience timeline
+  function animateExperience() {
+    const timelineItems = document.querySelectorAll(".timeline-item")
+    timelineItems.forEach((item, index) => {
+      setTimeout(() => {
+        item.style.opacity = "1"
+        item.style.transform = "translateY(0)"
+      }, index * 300)
+    })
+  }
+
+  // Animate achievements
+  function animateAchievements() {
+    const achievementItems = document.querySelectorAll(".achievement-item, .stat-item, .cert-item")
+    achievementItems.forEach((item, index) => {
+      setTimeout(() => {
+        item.style.opacity = "1"
+        item.style.transform = "translateY(0)"
+      }, index * 200)
+    })
+
+    // Animate stat numbers
+    const statNumbers = document.querySelectorAll(".stat-number")
+    statNumbers.forEach((stat) => {
+      const finalNumber = stat.textContent
+      const number = parseInt(finalNumber.replace("+", ""))
+      let counter = 0
+      const increment = number / 50
+
+      const timer = setInterval(() => {
+        counter += increment
+        if (counter >= number) {
+          stat.textContent = finalNumber
+          clearInterval(timer)
+        } else {
+          stat.textContent = Math.floor(counter) + "+"
+        }
+      }, 50)
     })
   }
 
@@ -351,324 +413,21 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Project Modal Functionality
-  const projectItems = document.querySelectorAll(".project-item")
-  const projectModal = document.querySelector(".project-modal")
-  const modalContent = document.querySelector(".modal-content")
-  const closeModal = document.querySelector(".close-modal")
-  const modalTitle = document.querySelector(".modal-title")
-  const modalCategory = document.querySelector(".modal-category")
-  const modalDescription = document.querySelector(".modal-description")
-  const techStack = document.querySelector(".tech-stack")
-  const galleryMain = document.querySelector(".gallery-main img")
-  const galleryThumbs = document.querySelector(".gallery-thumbs")
-  const prevBtn = document.querySelector(".prev-btn")
-  const nextBtn = document.querySelector(".next-btn")
-  const modalLinks = document.querySelector(".modal-links")
-
-  // Project data
-  const projectsData = [
-    {
-      id: 1,
-      title: "AI Image Generator",
-      category: "Web Development",
-      description:
-        "I developed an AI-powered image generation web application that leverages OpenAI's API to create unique images based on user prompts. The app features seamless API integration through a responsive React front-end and a robust Node.js/Express back-end. To enhance performance and user experience, I integrated Cloudinary for efficient image storage, optimization, and fast delivery.",
-      technologies: ["Express", "React", "Node.js", "MongoDB", "Open Ai API"],
-      images: [
-        "/ProjectCoverImage/Aiimagegencover.png",
-        "/ProjectCoverImage/Aiimagegen1.png",
-        "/ProjectCoverImage/Aiimagegen2.png",
-        "/ProjectCoverImage/Aiimagegen3.png",
-      ],
-      liveUrl: "https://ai-image-generator-mern.vercel.app/",
-      githubUrl: "https://github.com/AnuvanshKaushik/IMAGE_GENERATOR",
-    },
-    {
-      id: 2,
-      title: "Stock Prediction Analysis",
-      category: "Data Science",
-      description:
-        "I developed a stock price prediction model using Long Short-Term Memory (LSTM) neural networks to forecast future stock prices based on historical data. The project includes data preprocessing, model training, and visualization of predictions. The model analyzes patterns in historical stock data to make informed predictions about future price movements.",
-      technologies: ["Python", "TensorFlow", "Keras", "Pandas", "NumPy", "Matplotlib"],
-      images: [
-        "/ProjectCoverImage/StockCover.png",
-        "/ProjectCoverImage/Stock1.png",
-        "/ProjectCoverImage/Stock2.png",
-        "/ProjectCoverImage/Stock3.png",
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com/AnuvanshKaushik/Stock_Prediction_App",
-    },
-    {
-      id: 3,
-      title: "Sales Prediction Analysis",
-      category: "Data Science",
-      description:
-        "Stock Prediction Analysis is a web-based application that forecasts stock prices using a machine learning approach. The frontend is built with HTML, CSS, and JavaScript, providing a clean and interactive user interface. The backend is developed using Flask, which handles user input and communicates with a trained Random Forest model. This model, saved using Pickle, analyzes historical stock data to make accurate predictions. The application allows users to input relevant stock parameters and instantly receive predicted stock prices, offering a practical demonstration of data-driven financial forecasting.",
-      technologies: ["Python", "sklearn", "Pandas", "NumPy", "Matplotlib","Flask","HTML", "CSS", "JavaScript"],
-      images: [
-        "/ProjectCoverImage/Sale1.png",
-        "/ProjectCoverImage/Sale2.png",
-        "/ProjectCoverImage/Sale2.png",
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com/AnuvanshKaushik/SALES_PREDICTION",
-    },
-    {
-      id: 4,
-      title: "Whether Forecasting App",
-      category: "Web Development",
-      description:
-        "I developed a weather forecasting app using HTML, CSS, and JavaScript. The app allows users to search for any city and get real-time weather updates. It displays temperature, humidity, wind speed, and weather conditions in a clean and responsive interface. API integration ensures accurate and up-to-date data. This project showcases my front-end development skills and API handling in JavaScript.",
-      technologies: ["HTML", "CSS", "JavaScript","Api Integration"],
-      images: [
-        "/ProjectCoverImage/Whether1.png",
-        "/ProjectCoverImage/Whether2.png",  
-        "/ProjectCoverImage/Whether3.png",
-        "/ProjectCoverImage/Whether4.png",
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com/AnuvanshKaushik/Whether_Forecasting",
-    },
-  ]
-
-  let currentImageIndex = 0
-  let currentProject = null
-
-  // Make sure all project items have the correct data-id attribute
-  projectItems.forEach((item, index) => {
-    // If data-id is missing or doesn't match the index+1, set it
-    if (!item.getAttribute("data-id") || Number.parseInt(item.getAttribute("data-id")) !== index + 1) {
-      item.setAttribute("data-id", (index + 1).toString())
-    }
+  // Initialize timeline items with initial styles
+  const timelineItems = document.querySelectorAll(".timeline-item")
+  timelineItems.forEach((item) => {
+    item.style.opacity = "0"
+    item.style.transform = "translateY(50px)"
+    item.style.transition = "all 0.6s ease"
   })
 
-  // Open modal when clicking on a project
-  projectItems.forEach((item) => {
-    item.addEventListener("click", (e) => {
-      // Prevent opening if clicking on project links
-      if (e.target.closest(".project-links a")) {
-        return
-      }
-
-      const projectId = Number.parseInt(item.getAttribute("data-id"))
-      const project = projectsData.find((p) => p.id === projectId)
-
-      if (project) {
-        currentProject = project
-        openProjectModal(project)
-      } else {
-        console.error("Project not found for ID:", projectId)
-      }
-    })
+  // Initialize achievement items with initial styles
+  const achievementItems = document.querySelectorAll(".achievement-item, .stat-item, .cert-item")
+  achievementItems.forEach((item) => {
+    item.style.opacity = "0"
+    item.style.transform = "translateY(30px)"
+    item.style.transition = "all 0.6s ease"
   })
-
-  // Open project modal
-  function openProjectModal(project) {
-    // Set modal content
-    modalTitle.textContent = project.title
-    modalCategory.textContent = project.category
-    modalDescription.textContent = project.description
-
-    // Set technologies
-    techStack.innerHTML = ""
-    project.technologies.forEach((tech) => {
-      const techTag = document.createElement("span")
-      techTag.className = "tech-tag"
-      techTag.textContent = tech
-      techStack.appendChild(techTag)
-    })
-
-    // Set links
-    modalLinks.innerHTML = ""
-
-    if (project.liveUrl && project.liveUrl !== "#") {
-      const liveLinkElement = document.createElement("a")
-      liveLinkElement.href = project.liveUrl
-      liveLinkElement.target = "_blank"
-      liveLinkElement.className = "btn primary-btn live-link"
-      liveLinkElement.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Demo'
-      modalLinks.appendChild(liveLinkElement)
-    }
-
-    if (project.githubUrl && project.githubUrl !== "#") {
-      const githubLinkElement = document.createElement("a")
-      githubLinkElement.href = project.githubUrl
-      githubLinkElement.target = "_blank"
-      githubLinkElement.className = "btn secondary-btn github-link"
-      githubLinkElement.innerHTML = '<i class="fab fa-github"></i> View Code'
-      modalLinks.appendChild(githubLinkElement)
-    }
-
-    // Set images
-    currentImageIndex = 0
-    updateGalleryImage()
-
-    // Create thumbnails
-    galleryThumbs.innerHTML = ""
-    project.images.forEach((img, index) => {
-      const thumbItem = document.createElement("div")
-      thumbItem.className = `thumb-item ${index === 0 ? "active" : ""}`
-      thumbItem.innerHTML = `<img src="${img}" alt="Thumbnail ${index + 1}">`
-      thumbItem.addEventListener("click", () => {
-        currentImageIndex = index
-        updateGalleryImage()
-      })
-      galleryThumbs.appendChild(thumbItem)
-    })
-
-    // Show modal
-    projectModal.classList.add("active")
-    document.body.style.overflow = "hidden" // Prevent scrolling
-
-    // Update navigation buttons
-    updateNavButtons()
-  }
-
-  // Close modal
-  function closeProjectModal() {
-    projectModal.classList.remove("active")
-    document.body.style.overflow = "" // Restore scrolling
-  }
-
-  // Update gallery image
-  function updateGalleryImage() {
-    if (!currentProject) return
-
-    galleryMain.src = currentProject.images[currentImageIndex]
-    galleryMain.alt = `${currentProject.title} - Image ${currentImageIndex + 1}`
-
-    // Update thumbnails
-    document.querySelectorAll(".thumb-item").forEach((thumb, index) => {
-      if (index === currentImageIndex) {
-        thumb.classList.add("active")
-      } else {
-        thumb.classList.remove("active")
-      }
-    })
-
-    // Update navigation buttons
-    updateNavButtons()
-  }
-
-  // Update navigation buttons
-  function updateNavButtons() {
-    if (!currentProject) return
-
-    // Hide prev button if on first image
-    if (currentImageIndex === 0) {
-      prevBtn.style.opacity = "0.5"
-      prevBtn.style.pointerEvents = "none"
-    } else {
-      prevBtn.style.opacity = "1"
-      prevBtn.style.pointerEvents = "auto"
-    }
-
-    // Hide next button if on last image
-    if (currentImageIndex === currentProject.images.length - 1) {
-      nextBtn.style.opacity = "0.5"
-      nextBtn.style.pointerEvents = "none"
-    } else {
-      nextBtn.style.opacity = "1"
-      nextBtn.style.pointerEvents = "auto"
-    }
-  }
-
-  // Previous image
-  prevBtn.addEventListener("click", () => {
-    if (currentImageIndex > 0) {
-      currentImageIndex--
-      updateGalleryImage()
-    }
-  })
-
-  // Next image
-  nextBtn.addEventListener("click", () => {
-    if (currentProject && currentImageIndex < currentProject.images.length - 1) {
-      currentImageIndex++
-      updateGalleryImage()
-    }
-  })
-
-  // Close modal when clicking on close button
-  closeModal.addEventListener("click", closeProjectModal)
-
-  // Close modal when clicking outside of modal content
-  projectModal.addEventListener("click", (e) => {
-    if (e.target === projectModal) {
-      closeProjectModal()
-    }
-  })
-
-  // Close modal when pressing ESC key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && projectModal.classList.contains("active")) {
-      closeProjectModal()
-    }
-  })
-
-  // Keyboard navigation for gallery
-  document.addEventListener("keydown", (e) => {
-    if (!projectModal.classList.contains("active")) return
-
-    if (e.key === "ArrowLeft" && currentImageIndex > 0) {
-      currentImageIndex--
-      updateGalleryImage()
-    } else if (e.key === "ArrowRight" && currentProject && currentImageIndex < currentProject.images.length - 1) {
-      currentImageIndex++
-      updateGalleryImage()
-    }
-  })
-
-  // Add CSS class for success message
-  const style = document.createElement("style")
-  style.textContent = `
-    .success-message {
-      text-align: center;
-      padding: 30px;
-      animation: fadeIn 0.5s ease;
-    }
-    
-    .success-icon {
-      font-size: 4rem;
-      color: #4CAF50;
-      margin-bottom: 20px;
-    }
-    
-    .success-message h3 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: var(--primary-color);
-    }
-    
-    .success-message p {
-      font-size: 1.1rem;
-      color: var(--text-light);
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  `
-  document.head.appendChild(style)
-
-  // Check for image errors and replace with placeholders if needed
-  function handleImageErrors() {
-    const allImages = document.querySelectorAll('img:not([src^="data:"])')
-    
-    allImages.forEach(img => {
-      img.addEventListener('error', function() {
-        // Replace with placeholder if image fails to load
-        this.src = `/placeholder.svg?height=${this.height || 300}&width=${this.width || 400}`
-        this.alt = 'Image placeholder'
-      })
-    })
-  }
-  
-  // Call the function to handle image errors
-  handleImageErrors()
 
   // Update footer copyright year
   const footerYear = document.querySelector('footer .footer-content p')
