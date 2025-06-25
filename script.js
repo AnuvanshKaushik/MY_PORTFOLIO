@@ -246,11 +246,11 @@ document.addEventListener("DOMContentLoaded", () => {
       title: 'Whether Forecasting System',
       category: 'Web Development',
       description: 'Developed a weather forecasting web application using HTML, CSS, and JavaScript that fetches real-time weather data from a public API. The app displays current temperature, weather conditions, humidity, and wind speed with a clean, responsive user interface for a smooth user experience across devices.',
-      images: [
-        '/ProjectCoverImage/Weather1.png',
-        '/ProjectCoverImage/Weather2.png',
-        '/ProjectCoverImage/Weather3.png',
-        '/ProjectCoverImage/Weather4.png'
+     images: [
+        '/ProjectCoverImage/Whether1.png',
+        '/ProjectCoverImage/Whether2.png',
+        '/ProjectCoverImage/Whether3.png',
+        '/ProjectCoverImage/Whether4.png'
       ],
       technologies: ['React Native', 'Firebase', 'Redux', 'AsyncStorage'],
       liveUrl: 'https://example.com',
